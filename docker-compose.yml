@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  websocket-msk-producer:
+    image: websocket-msk-producer:latest  # Replace with your image tag
+    container_name: websocket-msk-producer
+    environment:
+      KAFKA_CONFIG: >   # replace values below when about to run
+        {"region": "your-region", "cluster_arn": "your-cluster-arn", "client_id": "your-client-id", "topic": "your-topic"}
+
+      WEBSOCKET_CONFIG: >
+        {"websocket_url": "your-websocket-url", "subscription_payload": {"key": "value"}}
+    volumes:
+      - /path/to/ec2/log_records:/app/log_records
+    restart: always  # Ensures the container restarts automatically if it fails
